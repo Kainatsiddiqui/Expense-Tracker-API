@@ -24,7 +24,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://expense-tracker-api-dusky.vercel.app",
+        "https://expense-tracker-api-git-main-portfolio-projects6.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
