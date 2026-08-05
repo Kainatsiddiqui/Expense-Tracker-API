@@ -6,10 +6,10 @@ function TopNavbar() {
   const { user } = useAuth();
 
   const pageConfig: Record<
-  string,
-  {
-    title: string;
-    subtitle: string;
+    string,
+    {
+      title: string;
+      subtitle: string;
     }
     >= {
       "/dashboard": {
@@ -36,9 +36,9 @@ function TopNavbar() {
   const today = new Date().toLocaleDateString(
     "en-US",
     {
-    weekday: "long",
-    month: "short",
-    day: "numeric",
+      weekday: "long",
+      month: "short",
+      day: "numeric",
     }
   );
   
@@ -46,7 +46,7 @@ function TopNavbar() {
     <div className="bg-white border border-gray-200 rounded-2l px-6 py-4 shadow-sm sticky top-0 z-10">
       <div className="flex items-center justify-between text-left">
         <div>
-          <h1 className="text-2l sm:text-3xlfont-bold text-gray-900">
+          <h1 className="text-2l sm:text-3xlfont-bold text-black-900">
             {currentPage.title}
           </h1>
           <p className="text-sm text-gray-500 mt-1">
