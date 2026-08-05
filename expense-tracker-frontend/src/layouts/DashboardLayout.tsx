@@ -110,7 +110,7 @@ function DashboardLayout(){
                 </div>
 
                 <div className="min-w-0">
-                    <p className="font-medium text-gray-900 truncate">
+                    <p className="text-left font-medium text-gray-900 truncate">
                     {user?.name || "User"}
                     </p>
                     <p className="text-xs text-gray-500 truncate">
@@ -151,7 +151,7 @@ function DashboardLayout(){
                         </div>
 
                         <div className="min-w-0">
-                            <p className="font-medium text-gray-900 truncate">
+                            <p className="text-left font-medium text-gray-900 truncate">
                             {user?.name || "User"}
                             </p>
 
