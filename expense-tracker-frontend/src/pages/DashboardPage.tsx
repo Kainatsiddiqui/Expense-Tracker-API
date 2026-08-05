@@ -189,7 +189,7 @@ function DashboardPage() {
 
               <div className="text-left">
                 <h2 className="text-xl font-semibold text-black-900">
-                  Monthly budget
+                  Monthly Budget
                 </h2>
 
                 <p className="text-sm text-gray-500 text-left">
