@@ -24,7 +24,7 @@ app.add_middleware(
         CORSMiddleware,
         allow_origins=[
             "http://localhost:5173",
-            "https://your-app-name.vercel.app",
+            "https://expense-tracker-api-dusky.vercel.app/login",
         ],
         allow_credentials=True,
         allow_methods=["*"],
@@ -42,8 +42,11 @@ app.include_router(behavioural_reports.router)
 
 @app.get("/")
 def root():
-    return {"message": "Docker reload test. Welcome to Kainat's Expense Tracker API"}
-
+    return {
+        "project": "Expense Tracker API",
+        "status": "online",
+        "docs": "/docs"
+    }
 
 @app.get("/about")
 def about():
