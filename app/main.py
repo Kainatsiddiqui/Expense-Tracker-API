@@ -21,15 +21,15 @@ app = FastAPI(
 )
 # Allow react app to call the API
 app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[
-            "http://localhost:5173",
-            "https://expense-tracker-api-dusky.vercel.app/login",
-        ],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://expense-tracker-api-dusky.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(user.router)
 app.include_router(expenses.router)
 app.include_router(auth.router)
