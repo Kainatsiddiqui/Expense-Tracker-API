@@ -2,8 +2,9 @@ import axios from "axios";
 
 /* Creating the api client */
 
+
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000",
 });
 
 api.interceptors.request.use((config) => {
