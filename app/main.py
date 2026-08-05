@@ -22,10 +22,7 @@ app = FastAPI(
 # Allow react app to call the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://expense-tracker-api-git-main-portfolio-projects6.vercel.app",
-    ],
+    allow_origin_regex=r"https://expense-tracker-api.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
