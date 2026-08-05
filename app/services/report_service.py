@@ -198,32 +198,19 @@ def get_monthly_trend(
         end,
     )
     results = (
-        db.query(
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date
-            ).label("month"),
-            func.sum(models.Expense.amount).label("total_spent")
-        )
-        .filter(
-            models.Expense.owner_id == user.id,
-            models.Expense.date >= start,
-            models.Expense.date <= end
-            )
-        .group_by(
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date,
-            )
-        )
-        .order_by(
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date,
-            )
-        )
-        .all()
+    db.query(
+        func.to_char(models.Expense.date, "YYYY-MM").label("month"),
+        func.sum(models.Expense.amount).label("total_spent"),
     )
+    .filter(
+        models.Expense.owner_id == user.id,
+        models.Expense.date >= start,
+        models.Expense.date <= end,
+    )
+    .group_by(func.to_char(models.Expense.date, "YYYY-MM"))
+    .order_by(func.to_char(models.Expense.date, "YYYY-MM"))
+    .all()
+)
 
     return [
         {
@@ -438,19 +425,16 @@ def get_weekend_vs_weekday(
     )
     results = (
         db.query(
-            func.strftime(
-                "%w",
-                models.Expense.date
-            ).label("day_of_week"),
+            func.extract("dow", models.Expense.date).label("day_of_week"),
             func.sum(models.Expense.amount),
-            func.count(models.Expense.id)
+            func.count(models.Expense.id),
         )
         .filter(
             models.Expense.owner_id == user.id,
             models.Expense.date >= start,
-            models.Expense.date < end
-            )
-        .group_by("day_of_week")
+            models.Expense.date <= end,
+        )
+        .group_by(func.extract("dow", models.Expense.date))
         .all()
     )
     #combine the totals
@@ -461,7 +445,7 @@ def get_weekend_vs_weekday(
     weekend_transactions = 0
 
     for day, total, count in results:
-        if day in ("0", "6"):
+        if int(day) in (0, 6):
             weekend_spending += total
             weekend_transactions += count
         else:
@@ -508,24 +492,21 @@ def get_category_trends(
     results = (
         db.query(
             models.Expense.category,
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date
-            ).label("month"),
-            func.sum(models.Expense.amount).label("amount")
+            func.to_char(models.Expense.date, "YYYY-MM").label("month"),
+            func.sum(models.Expense.amount).label("amount"),
         )
         .filter(
             models.Expense.owner_id == user.id,
             models.Expense.date >= start,
-            models.Expense.date < end
+            models.Expense.date <= end,
         )
         .group_by(
             models.Expense.category,
-            "month"
+            func.to_char(models.Expense.date, "YYYY-MM"),
         )
         .order_by(
             models.Expense.category,
-            "month"
+            func.to_char(models.Expense.date, "YYYY-MM"),
         )
         .all()
     )
@@ -749,10 +730,7 @@ def get_highest_spending_month(
     )
     result = (
         db.query(
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date,
-            ).label("month"),
+            func.to_char(models.Expense.date, "YYYY-MM").label("month"),
             func.sum(models.Expense.amount).label("total_spent"),
         )
         .filter(
@@ -760,18 +738,11 @@ def get_highest_spending_month(
             models.Expense.date >= start,
             models.Expense.date <= end,
         )
-        .group_by(
-            func.strftime(
-                "%Y-%m",
-                models.Expense.date,
-            )
-        )
-        .order_by(
-            func.sum(models.Expense.amount).desc()
-        )
+        .group_by(func.to_char(models.Expense.date, "YYYY-MM"))
+        .order_by(func.sum(models.Expense.amount).desc())
         .first()
     )
-
+        
     if result is None:
         return None
 
