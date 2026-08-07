@@ -41,7 +41,6 @@ function MonthlyTrendChart({
                     <h3 className="text-lg font-semibold text-gray-900 text-left">
                         Monthly Spending Trend 
                     </h3>
-
                     <p className="text-sm text-gray-500 mt-1 text-left">
                         Your spending across the last {data.length} months
                     </p>
@@ -203,5 +202,4 @@ function MonthlyTrendChart({
         </div>
     );
 }
-
 export default MonthlyTrendChart;

@@ -71,13 +71,13 @@ function Pagination({
 
             <div className="flex-wrap justify-center sm:justify-end text-xs">
                 <button
-                onClick={() =>
-                    onPageChange(page - 1)
-                }
-                disabled={page === 1}
-                className="px-3 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={() =>
+                        onPageChange(page - 1)
+                    }
+                    disabled={page === 1}
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                Previous
+                    Previous
                 </button>
                 {visiblePages.map( 
                     (item, index) => 
@@ -121,5 +121,4 @@ function Pagination({
         </div>
     );
 }
-
 export default Pagination;

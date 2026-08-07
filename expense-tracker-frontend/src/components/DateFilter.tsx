@@ -91,17 +91,16 @@ function DateFilter({
                                 />
                             </div>
                         </div>
-                            <button
-                                onClick={onApply}
-                                className="w-full lg:w-auto bg-blue-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors"
-                            >
+                        <button
+                            onClick={onApply}
+                            className="w-full lg:w-auto bg-blue-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors"
+                        >
                             Apply filter
-                            </button>
+                        </button>
                     </div>
                 </div>
-                )}
-            </div>
-        );
-    }
-
+            )}
+        </div>
+    );
+}
 export default DateFilter;
