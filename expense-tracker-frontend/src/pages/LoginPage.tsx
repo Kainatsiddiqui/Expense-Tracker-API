@@ -8,7 +8,6 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -17,20 +16,19 @@ function LoginPage() {
     
   ) {
       e.preventDefault();
-
       try {
         const data = await loginRequest(
           email,
           password
         );
-
         localStorage.setItem("email", email);
         await login(data.access_token);
         navigate("/dashboard");
       } catch {
-        setError("Invalid email or password");
+          setError("Invalid email or password");
       }
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
@@ -40,7 +38,6 @@ function LoginPage() {
         <h1 className="text-2xl font-bold text-center">
           Login
         </h1>
-
         <input
           type="email"
           placeholder="Email"
@@ -48,7 +45,6 @@ function LoginPage() {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full border rounded-lg p-3"
         />
-
         <input
           type="password"
           placeholder="Password"
@@ -56,13 +52,11 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full border rounded-lg p-3"
         />
-
         {error && (
           <p className="text-red-500 text-sm">
             {error}
           </p>
         )}
-
         <button
           type="submit"
           className="w-full bg-blue-600 text-white rounded-lg p-3"
@@ -83,5 +77,4 @@ function LoginPage() {
     </div>
   );
 }
-
 export default LoginPage;

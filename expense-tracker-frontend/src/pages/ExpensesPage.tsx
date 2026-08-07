@@ -15,7 +15,7 @@ function ExpensesPage() {
         useState(false);
 
     const [editingExpense, setEditingExpense] =
-     useState<Expense | null>(null);
+        useState<Expense | null>(null);
     
     const [search, setSearch] = useState("");
     
@@ -32,7 +32,7 @@ function ExpensesPage() {
         useState("");
 
     const [sortBy, setSortBy] =
-    useState("date_desc");
+        useState("date_desc");
 
     const [expenses, setExpenses] =
         useState<Expense[]>([]);
@@ -95,36 +95,36 @@ function ExpensesPage() {
             );
 
             await deleteExpense(
-            expenseToDelete.id
+                expenseToDelete.id
             );
 
             setTotalExpenses(
-            (prev) => prev - 1
+                (prev) => prev - 1
             );
 
             showToast(
-            "Expense deleted successfully"
+                "Expense deleted successfully"
             );
 
             setExpenseToDelete(null);
 
             const remainingExpenses =
-            expenses.length - 1;
+                expenses.length - 1;
 
             if (
-            remainingExpenses === 0 &&
-            page > 1
+                remainingExpenses === 0 &&
+                page > 1
             ) {
-            setPage(page - 1);
+                setPage(page - 1);
             } else {
-            loadExpenses();
+                loadExpenses();
             }
         } catch (error) {
             loadExpenses();
 
             showToast(
-            "Failed to delete expense",
-            "error"
+                "Failed to delete expense",
+                "error"
             );
         } finally {
             setDeleting(false);
@@ -141,83 +141,83 @@ function ExpensesPage() {
     }
 
    async function loadExpenses() {
-   try {
-    setLoading(true);
-    const data = await getExpenses({
-    page,
-    limit,
-    search,
-    category,
-    startDate,
-    endDate,
-    sort: sortBy,
-    });
+    try {
+        setLoading(true);
+        const data = await getExpenses({
+            page,
+            limit,
+            search,
+            category,
+            startDate,
+            endDate,
+            sort: sortBy,
+        });
+        setExpenses(data.items);
+        setTotalPages(data.total_pages);
+        setTotalExpenses(data.total);
+        } catch (error) {
+            console.error(
+                "Failed to load expenses",
+                error
+            );
+        } finally {
+            setLoading(false);
+        }
+    }
 
-    setExpenses(data.items);
-    setTotalPages(data.total_pages);
-    setTotalExpenses(data.total);
-    } catch (error) {
-        console.error(
-        "Failed to load expenses",
-        error
-        );
-    } finally {
-        setLoading(false);
-    }
-    }
     useEffect(() => {
-    loadExpenses();
+        loadExpenses();
     }, [
-    page,
-    search,
-    category,
-    startDate,
-    endDate,
-    sortBy,
+        page,
+        search,
+        category,
+        startDate,
+        endDate,
+        sortBy,
     ]);
+
     useEffect(() => {
-    setPage(1);
+        setPage(1);
     }, [
-    search,
-    category,
-    startDate,
-    endDate,
-    sortBy,
+        search,
+        category,
+        startDate,
+        endDate,
+        sortBy,
     ]);
+
     useEffect(() => {
-    const timer = setTimeout(() => {
-        setSearch(searchInput);
+        const timer = setTimeout(() => {
+            setSearch(searchInput);
     }, 500);
 
-    return () => clearTimeout(timer);
+        return () => clearTimeout(timer);
     }, [searchInput]);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6">
         <div className="space-y-6">
         {/* Header */}
-
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 gap-4">
-            <div className="text-left">
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    Transactions
-                </h2>
-                <p className="text-gray-500 mt-1">
-                    Search, filter and manage your expenses
-                </p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 gap-4">
+                <div className="text-left">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                        Transactions
+                    </h2>
+                    <p className="text-gray-500 mt-1">
+                        Search, filter and manage your expenses
+                    </p>
+                </div>
+                <button
+                onClick={() =>
+                    setIsAddModalOpen(true)
+                }
+                className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-sm text-center justify-center"
+                >
+                <Plus size={18} />
+                    Add expense
+                </button>
             </div>
-
-            <button
-            onClick={() =>
-                setIsAddModalOpen(true)
-            }
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-sm text-center justify-center"
-            >
-            <Plus size={18} />
-            Add expense
-            </button>
         </div>
-            </div>
         <div className="space-y-4">
 
         {/* Filters row */}
@@ -225,9 +225,8 @@ function ExpensesPage() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-5">
                 <div>
                     <h3 className="text-left text-lg font-semibold text-gray-900">
-                        Filter expenses
+                        Filter Expenses
                     </h3>
-
                     <p className="text-sm text-gray-500 mt-1">
                         Search and narrow down your transactions
                     </p>
@@ -235,99 +234,99 @@ function ExpensesPage() {
                 <button
                     onClick={handleClearFilters}
                     className="text-sm font-medium text-gray-600 hover:text-gray-900 self-start lg:self-center"
-                    >
+                >
                     Clear filters
-                    </button>
+                </button>
             </div>
             <div className="border-t border-gray-200 pt-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex flex-wrap items-center gap-3">
                     {/* Search */}
-                    <div className="flex-1 min-w-[180px]">
-                        <input
-                            type="text"
-                            placeholder="Search expenses..."
-                            value={searchInput}
-                            onChange={(e) =>
-                            setSearchInput(e.target.value)
-                            }
-                            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        />
-                    </div>
-                    {/* Category */}
-                    <div className="w-44">
-                        <select
-                            value={category}
-                            onChange={(e) =>
-                            setCategory(e.target.value)
-                            }
-                            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        >
-                            <option value="">
-                            All categories
-                            </option>
-
-                            {EXPENSE_CATEGORIES.map((cat) => (
-                            <option
-                                key={cat}
-                                value={cat}
+                        <div className="flex-1 min-w-[180px]">
+                            <input
+                                type="text"
+                                placeholder="Search expenses..."
+                                value={searchInput}
+                                onChange={(e) =>
+                                setSearchInput(e.target.value)
+                                }
+                                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            />
+                        </div>
+                        {/* Category */}
+                        <div className="w-44">
+                            <select
+                                value={category}
+                                onChange={(e) =>
+                                    setCategory(e.target.value)
+                                }
+                                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             >
-                                {cat}
-                            </option>
-                            ))}
-                        </select>
-                    </div>
+                                <option value="">
+                                    All categories
+                                </option>
+
+                                {EXPENSE_CATEGORIES.map((cat) => (
+                                <option
+                                    key={cat}
+                                    value={cat}
+                                >
+                                    {cat}
+                                </option>
+                                ))}
+                            </select>
+                        </div>
                 
-                    {/* Sort */}
-                    <div className="w-44">
-                        <select
-                            value={sortBy}
-                            onChange={(e) =>
-                            setSortBy(e.target.value)
-                            }
-                            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        >
-                            <option value="date_desc">
-                            Newest first
-                            </option>
+                        {/* Sort */}
+                        <div className="w-44">
+                            <select
+                                value={sortBy}
+                                onChange={(e) =>
+                                setSortBy(e.target.value)
+                                }
+                                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            >
+                                <option value="date_desc">
+                                    Newest first
+                                </option>
 
-                            <option value="date_asc">
-                            Oldest first
-                            </option>
+                                <option value="date_asc">
+                                    Oldest first
+                                </option>
 
-                            <option value="amount_desc">
-                            Highest amount
-                            </option>
+                                <option value="amount_desc">
+                                    Highest amount
+                                </option>
 
-                            <option value="amount_asc">
-                            Lowest amount
-                            </option>
-                        </select>
-                    </div>
+                                <option value="amount_asc">
+                                    Lowest amount
+                                </option>
+                            </select>
+                        </div>
 
-                    {/* Start date */}
-                    <div className="w-40">
-                        <input
-                            type="date"
-                            value={startDate}
-                            onChange={(e) =>
-                            setStartDate(e.target.value)
-                            }
-                            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        />
-                    </div>
+                        {/* Start date */}
+                        <div className="w-40">
+                            <input
+                                type="date"
+                                value={startDate}
+                                onChange={(e) =>
+                                setStartDate(e.target.value)
+                                }
+                                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            />
+                        </div>
                     
-                    {/* End date */}
-                    <div className="w-40">
-                        <input
-                            type="date"
-                            value={endDate}
-                            onChange={(e) =>
-                            setEndDate(e.target.value)
-                            }
-                            className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        />
-                    </div>
+                        {/* End date */}
+                        <div className="w-40">
+                            <input
+                                type="date"
+                                value={endDate}
+                                onChange={(e) =>
+                                setEndDate(e.target.value)
+                                }
+                                className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -335,71 +334,71 @@ function ExpensesPage() {
         <div className="mt-4 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
                 <table className="w-full min-w-[600px]">
-                        {loading ? (
-                            <TableSkeleton />
-                            ) : (
-                            <ExpenseTable
-                                expenses={expenses}
-                                onEdit={(expense) =>
+                    {loading ? (
+                        <TableSkeleton />
+                    ) : (
+                        <ExpenseTable
+                            expenses={expenses}
+                            onEdit={(expense) =>
                                 setEditingExpense(expense)
-                                }
-                                onDelete={(expense) =>
+                            }
+                            onDelete={(expense) =>
                                 setExpenseToDelete(expense)
-                                }
-                            />
-                        )}
+                            }
+                        />
+                    )}
                 </table>
             </div>
         </div>
         <Pagination
-                            page={page}
-                            totalPages={totalPages}
-                            totalItems={totalExpenses}
-                            limit={limit}
-                        onPageChange={setPage}
-                        />
+            page={page}
+            totalPages={totalPages}
+            totalItems={totalExpenses}
+            limit={limit}
+            onPageChange={setPage}
+        />
         </div>
-                <ExpenseFormModal
-                    isOpen={
-                        isAddModalOpen ||
-                        editingExpense !== null
-                    }
-                    expense={editingExpense}
-                    onClose={() => {
-                        setIsAddModalOpen(false);
-                        setEditingExpense(null);
-                    }}
-                    onSuccess={() => {
-                        loadExpenses();
-                        showToast(
-                            editingExpense
-                            ? "Expense updated successfully"
-                            : "Expense added successfully",
-                            "success"
-                        );
-                        setIsAddModalOpen(false);
-                        setEditingExpense(null);
-                    }}
+        <ExpenseFormModal
+            isOpen={
+                isAddModalOpen ||
+                editingExpense !== null
+            }
+            expense={editingExpense}
+            onClose={() => {
+                setIsAddModalOpen(false);
+                setEditingExpense(null);
+            }}
+            onSuccess={() => {
+                loadExpenses();
+                showToast(
+                    editingExpense
+                    ? "Expense updated successfully"
+                    : "Expense added successfully",
+                    "success"
+                );
+                setIsAddModalOpen(false);
+                setEditingExpense(null);
+            }}
+        />
+        <ConfirmationModal
+            isOpen={expenseToDelete !== null}
+            title="Delete expense?"
+            message={`Are you sure you want to delete "${expenseToDelete?.title}"? This action cannot be undone.`}
+            confirmText="Delete"
+            loading={deleting}
+            onClose={() =>
+                setExpenseToDelete(null)
+            }
+            onConfirm={handleDelete}
+        />
+        {toast.visible && (
+            <div className="fixed top-6 right-6 z-50">
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
                 />
-                <ConfirmationModal
-                    isOpen={expenseToDelete !== null}
-                    title="Delete expense?"
-                    message={`Are you sure you want to delete "${expenseToDelete?.title}"? This action cannot be undone.`}
-                    confirmText="Delete"
-                    loading={deleting}
-                    onClose={() =>
-                        setExpenseToDelete(null)
-                    }
-                    onConfirm={handleDelete}
-                />
-                {toast.visible && (
-                    <div className="fixed top-6 right-6 z-50">
-                        <Toast
-                        message={toast.message}
-                        type={toast.type}
-                        />
-                    </div>
-                )}
+            </div>
+        )}
     </div>
     );
 }
