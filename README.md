@@ -1,4 +1,4 @@
-# Expense Tracker – Full Stack Personal Finance & Analytics Platform
+# Expense Tracker - Full Stack Personal Finance & Analytics Platform
 
 A full-stack **Expense Tracker** web application built with **FastAPI, React, TypeScript, PostgreSQL, and Docker**. The application helps users track expenses, manage monthly budgets, analyze spending patterns, and visualize financial insights through interactive dashboards and reports.
 
@@ -10,7 +10,7 @@ The project demonstrates a complete full-stack development workflow including **
 * **Backend API (Render):** https://expense-tracker-api-gnnt.onrender.com
 * **API Documentation:** https://expense-tracker-api-gnnt.onrender.com/docs
 
-## 📸API Preview
+## API Preview
 
 ![](images/api-collage.png)
 
